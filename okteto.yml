@@ -1,0 +1,7 @@
+name: wso2am
+command: bash
+workdir: /okteto
+sync:
+  - .:/okteto
+forward:
+  - 9443:9443
