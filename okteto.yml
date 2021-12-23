@@ -1,4 +1,4 @@
-name: wso2am
+name: apim
 command: bash
 workdir: /okteto
 sync:
