@@ -1,0 +1,8 @@
+name: myapps
+command: bash
+workdir: /home/wso2am-4.0.0
+sync:
+- .:/home/wso2am-4.0.0
+forward:
+- 9443:9443
+autocreate: true
