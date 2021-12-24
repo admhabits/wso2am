@@ -154,7 +154,7 @@ RUN \
     # && echo "\n\ Fetching source dari repository jika ada : $ git clone ${WSO2_GITHUB_REMOTE_LINK}" \
     # && echo "selesai"\
     \
-    wget -O ${WSO2_SERVER}.zip "${WSO2_SERVER_OFFICIAL_LINK}" \
+    && wget -O ${WSO2_SERVER}.zip "${WSO2_SERVER_OFFICIAL_LINK}" \
     && unzip -d ${USER_HOME} ${WSO2_SERVER}.zip \
     \
     && mv ${USER_HOME}/${WSO2_SERVER} ${USER_HOME}/${REMOTE_NAME}  \
