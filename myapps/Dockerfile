@@ -67,6 +67,7 @@ ARG USER_HOME=/home/${USER}
 
 # Membuat argumen untuk instalasi produk WSO2
 ARG REMOTE_NAME=wso2am
+ARG REMOTE_BRANCH=server
 ARG WSO2_SERVER_NAME=wso2am
 ARG WSO2_SERVER_VERSION=4.0.0
 ARG WSO2_SERVER_REPOSITORY=product-apim
@@ -153,7 +154,7 @@ RUN \
     && cd ${USER_HOME} \
     && git clone ${WSO2_GITHUB_REMOTE_LINK} \
     && chown ${USER}:${USER_GROUP} -R ${REMOTE_NAME} \
-    && cd ${REMOTE_NAME} && rm -rf .git && cd .. \
+    && cd ${REMOTE_NAME} && git checkout ${REMOTE_BRANCH} && rm -rf .git && cd .. \
     && cd ${REMOTE_NAME}/repository/deployment/server \
     && mkdir ${USER_HOME}/${USER_GROUP}-tmp \
     && bash -c 'mkdir -p ${USER_HOME}/solr/{indexed-data,database}' \
