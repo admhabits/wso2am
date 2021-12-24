@@ -152,11 +152,23 @@ RUN sudo whoami
 RUN \
     sudo whoami \
     && cd ${USER_HOME} \
+    && echo "n\ Lihat semua directory : cd ${USER_HOME}\n" \
+    && ls -la \
     && mkdir ${USER_GROUP}-tmp \
+    && echo "n\ Lihat semua directory : mkdir ${USER_GROUP}-tmp \n" \
+    && ls -la \
     && bash -c 'mkdir -p /solr/{indexed-data,database}' \
+    && echo "n\ Lihat semua directory : \n" \
+    && ls -la \
     && git clone ${WSO2_GITHUB_REMOTE_LINK} \
+    && echo "n\ Lihat semua directory : git clone ${WSO2_GITHUB_REMOTE_LINK}\n" \
+    && ls -la \
     && chown ${USER}:${USER_GROUP} -R ${REMOTE_NAME} \
-    && cd /${REMOTE_NAME} && git checkout ${REMOTE_BRANCH} && rm -rf .git && cd .. \
+    && echo "n\ Lihat semua directory : \n" \
+    && ls -la \
+    && cd /${REMOTE_NAME} \
+    && git checkout ${REMOTE_BRANCH} \
+    && rm -rf .git && cd .. \
     && cd /${REMOTE_NAME}/repository/deployment/server \
     && chown ${USER}:${USER_GROUP} -R ${USER_HOME}/solr \
     && cp -r ${WSO2_SERVER_REMOTE_HOME}/repository/deployment/server/synapse-configs ${USER_HOME}/${USER_GROUP}-tmp \
