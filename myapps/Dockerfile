@@ -78,12 +78,12 @@ which is under the Apache License, Version 2.0. \n\
 Read more about Apache License, Version 2.0 here @ http://www.apache.org/licenses/LICENSE-2.0.\n"
 
 # Buat pengguna dan grup non-root dan atur pesan masuk MOTD
-RUN adduser ${USER} --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password \
-    && echo "${USER}:password" | sudo chpasswd
-USER ${USER}
+RUN adduser ${USER_ROOT} --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password \
+    && echo "${USER_ROOT}:password" | sudo chpasswd
+USER ${USER_ROOT}
+RUN whoami
 
 RUN \ 
-    whoami \
     groupadd --system -g ${USER_GROUP_ID} ${USER_GROUP} \
     && useradd --system --create-home --home-dir ${USER_HOME} --no-log-init -g ${USER_GROUP_ID} -u ${USER_ID} ${USER} \
     && echo '[ ! -z "${TERM}" -a -r /etc/motd ] && cat /etc/motd' >> /etc/bash.bashrc; echo "${MOTD}" > /etc/motd
