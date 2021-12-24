@@ -178,7 +178,7 @@ RUN \
     && cd ${REMOTE_NAME}/repository/deployment/server/jaggeryapps \
     && ls && echo "\n"\
     && echo "\n\ ===== Buat Branch Baru =====" \
-    && git init && git branch dev && git branch \
+    && git init && git add . && git commit -m "buat branch baru untuk pengembangan jaggeryapps" && git branch -M dev && git branch \
     && ls && echo "\n" \
     && cp -r ${WSO2_SERVER_REMOTE_HOME}/repository/deployment/server/synapse-configs ${USER_HOME}/${USER_GROUP}-tmp \
     && cp -r ${WSO2_SERVER_REMOTE_HOME}/repository/deployment/server/executionplans ${USER_HOME}/${USER_GROUP}-tmp 
