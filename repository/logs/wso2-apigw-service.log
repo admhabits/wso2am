@@ -1,0 +1,3 @@
+2021-12-24T01:48:11,087 [-] [Framework Event Dispatcher: Equinox Container: e5adb744-188c-41b0-9906-5da5111f7ce6]  INFO WorkflowCallbackService Building Axis service for Proxy service : WorkflowCallbackService
+2021-12-24T01:48:11,103 [-] [Framework Event Dispatcher: Equinox Container: e5adb744-188c-41b0-9906-5da5111f7ce6]  INFO WorkflowCallbackService Adding service WorkflowCallbackService to the Axis2 configuration
+2021-12-24T01:48:11,119 [-] [Framework Event Dispatcher: Equinox Container: e5adb744-188c-41b0-9906-5da5111f7ce6]  INFO WorkflowCallbackService Successfully created the Axis2 service for Proxy service : WorkflowCallbackService
