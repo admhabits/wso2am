@@ -153,23 +153,23 @@ RUN \
     sudo whoami \
     && cd ${USER_HOME} \
     && echo "n\ Lihat semua directory : cd ${USER_HOME}\n" \
-    && ls -la \
+    && ls \
     && mkdir ${USER_GROUP}-tmp \
     && echo "n\ Lihat semua directory : mkdir ${USER_GROUP}-tmp \n" \
-    && ls -la \
+    && ls \
     && bash -c 'mkdir -p /solr/{indexed-data,database}' \
     && echo "n\ Lihat semua directory : \n" \
-    && ls -la \
+    && ls \
     && git clone ${WSO2_GITHUB_REMOTE_LINK} \
     && echo "n\ Lihat semua directory : git clone ${WSO2_GITHUB_REMOTE_LINK}\n" \
-    && ls -la \
+    && ls \
     && chown ${USER}:${USER_GROUP} -R ${REMOTE_NAME} \
     && echo "n\ Lihat semua directory : \n" \
-    && ls -la \
-    && cd /${REMOTE_NAME} \
+    && ls \
+    && cd ${REMOTE_NAME} \
     && git checkout ${REMOTE_BRANCH} \
     && rm -rf .git && cd .. \
-    && cd /${REMOTE_NAME}/repository/deployment/server \
+    && cd ${REMOTE_NAME}/repository/deployment/server \
     && chown ${USER}:${USER_GROUP} -R ${USER_HOME}/solr \
     && cp -r ${WSO2_SERVER_REMOTE_HOME}/repository/deployment/server/synapse-configs ${USER_HOME}/${USER_GROUP}-tmp \
     && cp -r ${WSO2_SERVER_REMOTE_HOME}/repository/deployment/server/executionplans ${USER_HOME}/${USER_GROUP}-tmp 
