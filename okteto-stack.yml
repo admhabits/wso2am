@@ -22,8 +22,8 @@ services:
       timeout: 60s
       retries: 5
       start_period: 80s
-  myapps:
-    build: myapps
+  wso2am:
+    build: wso2am
     healthcheck:
       test: ["CMD", "nc", "-z","localhost", "9443"]
       interval: 10s
@@ -33,7 +33,7 @@ services:
       mysql:
         condition: service_healthy
     volumes:
-      - ./conf/myapps:/home/wso2carbon/wso2-config-volume
+      - ./conf/wso2am:/home/wso2carbon/wso2-config-volume
     ports:
       - "9443:9443"
       - "8280:8280"
@@ -42,7 +42,7 @@ services:
       # dev.okteto.com/auto-ingress: 'true'
       nginx.ingress.kubernetes.io/backend-protocol: HTTPS
 endpoints:
-  myapps:
+  wso2am:
   - path: /
-    service: myapps
+    service: wso2am
     port: 9443

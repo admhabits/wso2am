@@ -2,4 +2,4 @@ icon: https://github.com/okteto/polling/raw/master/icon.png
 deploy:
   - okteto stack deploy --build --file okteto-stack.yml
 devs:
-  - myapps/okteto.yml
+  - wso2am/okteto.yml

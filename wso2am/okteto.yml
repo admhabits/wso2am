@@ -1,4 +1,4 @@
-name: myapps
+name: wso2am
 command: bash
 workdir: /home/wso2am-4.0.0
 sync:
