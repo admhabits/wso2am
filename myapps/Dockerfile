@@ -25,7 +25,8 @@ LABEL maintainer="WSO2 Docker Maintainers <dev@wso2.org>" \
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends tzdata curl ca-certificates fontconfig locales \
+    && apt-get install -y --no-install-recommends tzdata curl ca-certificates fontconfig locales \ 
+        sudo \
     && echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
     && locale-gen en_US.UTF-8
 
@@ -105,8 +106,7 @@ RUN \
         vim \
         git \
         nodejs \
-        npm \
-        sudo 
+        npm 
 
 RUN whoami
 RUN sudo whoami
