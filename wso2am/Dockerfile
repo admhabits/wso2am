@@ -123,16 +123,16 @@ RUN \
 # Tambahkan distribusi produk WSO2 ke direktori home pengguna
 
 # === DOWNLOAD RESOURCE DARI GITHUB OFFICIAL ===
-RUN \
-    wget -O ${WSO2_SERVER}.zip "${WSO2_SERVER_OFFICIAL_LINK}" \
-    && unzip -d ${USER_HOME} ${WSO2_SERVER}.zip \
-    && chown ${USER}:${USER_GROUP} -R ${WSO2_SERVER_HOME} \
-    && mkdir ${USER_HOME}/${USER_GROUP}-tmp \
-    && bash -c 'mkdir -p ${USER_HOME}/solr/{indexed-data,database}' \
-    && chown ${USER}:${USER_GROUP} -R ${USER_HOME}/solr \
-    && cp -r ${WSO2_SERVER_HOME}/repository/deployment/server/synapse-configs ${USER_HOME}/${USER_GROUP}-tmp \
-    && cp -r ${WSO2_SERVER_HOME}/repository/deployment/server/executionplans ${USER_HOME}/${USER_GROUP}-tmp \
-    && rm -f ${WSO2_SERVER}.zip
+# RUN \
+#     wget -O ${WSO2_SERVER}.zip "${WSO2_SERVER_OFFICIAL_LINK}" \
+#     && unzip -d ${USER_HOME} ${WSO2_SERVER}.zip \
+#     && chown ${USER}:${USER_GROUP} -R ${WSO2_SERVER_HOME} \
+#     && mkdir ${USER_HOME}/${USER_GROUP}-tmp \
+#     && bash -c 'mkdir -p ${USER_HOME}/solr/{indexed-data,database}' \
+#     && chown ${USER}:${USER_GROUP} -R ${USER_HOME}/solr \
+#     && cp -r ${WSO2_SERVER_HOME}/repository/deployment/server/synapse-configs ${USER_HOME}/${USER_GROUP}-tmp \
+#     && cp -r ${WSO2_SERVER_HOME}/repository/deployment/server/executionplans ${USER_HOME}/${USER_GROUP}-tmp \
+#     && rm -f ${WSO2_SERVER}.zip
 
 # === DOWNLOAD RESOURCE RILIS DARI GITHUB ===
 # RUN \
@@ -146,46 +146,46 @@ RUN \
 #     && cp -r ${WSO2_SERVER_GITHUB_HOME}/repository/deployment/server/executionplans ${USER_HOME}/${USER_GROUP}-tmp \
 #     && rm -f ${WSO2_SERVER}.zip
 
-# # === CLONE RESOURCE BRANCH DARI GITHUB ===
-# RUN \
-#     sudo whoami \
-#     && echo "\n\ Fetching source dari repository : $ git clone ${WSO2_GITHUB_REMOTE_LINK}" \
-#     && echo "selesai"\
-#     && cd ${USER_HOME} && git clone ${WSO2_GITHUB_REMOTE_LINK} && cd .. && cd .. \
-#     \
-#     && chown ${USER}:${USER_GROUP} -R ${WSO2_SERVER_REMOTE_HOME} \
-#     && echo "\n\ Semua direktori : $ ls -a" \
-#     && echo "selesai"\
-#     \
-#     && bash -c 'mkdir -p ${USER_HOME}/solr/{indexed-data,database}' \
-#     && echo "\n\ Buat direktori : $ mkdir -p ${USER_HOME}/solr/{indexed-data,database}" \
-#     && echo "selesai"\
-#     \
-#     && chown ${USER}:${USER_GROUP} -R ${USER_HOME}/solr \
-#     && echo "\n\ Buat Permission Group : $ chown ${USER}:${USER_GROUP} -R ${USER_HOME}/solr" \
-#     && echo "selesai"\
-#     \
-#     && mkdir ${USER_HOME}/${USER_GROUP}-tmp \
-#     && echo "\n\ Buat direktori: $ mkdir ${USER_HOME}/${USER_GROUP}-tmp " \
-#     && echo "selesai"\
-#     \
-#     && cd ${WSO2_SERVER_REMOTE_HOME} \
-#     && echo "\n\ Masuk direktori git clone : $ cd ${WSO2_SERVER_REMOTE_HOME}" \
-#     && ls -l && echo "\n"\
-#     && git checkout ${REMOTE_BRANCH} \
-#     && echo "\n\ Pindah branch repository ${REMOTE_BRANCH} : $ git checkout ${REMOTE_BRANCH}" \
-#     && ls && echo "\n"\
-#     && rm -rf .git && cd .. \
-#     && echo "\n\ ===== Inisialisasi Pengembangan Jaggeryapps WSO2AM =====" \
-#     && cd ${WSO2_SERVER_REMOTE_HOME}/repository/deployment/server/jaggeryapps \
-#     && ls && echo "\n"\
-#     && echo "\n\ ===== Buat Branch Baru =====" \
-#     && git config --global user.email ${MY_EMAIL_GIT} \
-#     && git config --global user.user ${USER} \
-#     && git init && git add . && git commit -m "buat branch baru untuk pengembangan jaggeryapps" && git branch -M dev && git branch \
-#     && ls && echo "\n" \
-#     && cp -r ${WSO2_SERVER_REMOTE_HOME}/repository/deployment/server/synapse-configs ${USER_HOME}/${USER_GROUP}-tmp \
-#     && cp -r ${WSO2_SERVER_REMOTE_HOME}/repository/deployment/server/executionplans ${USER_HOME}/${USER_GROUP}-tmp 
+# === CLONE RESOURCE BRANCH DARI GITHUB ===
+RUN \
+    sudo whoami \
+    && echo "\n\ Fetching source dari repository : $ git clone ${WSO2_GITHUB_REMOTE_LINK}" \
+    && echo "selesai"\
+    && cd ${USER_HOME} && git clone ${WSO2_GITHUB_REMOTE_LINK} && cd .. && cd .. \
+    \
+    && chown ${USER}:${USER_GROUP} -R ${WSO2_SERVER_REMOTE_HOME} \
+    && echo "\n\ Semua direktori : $ ls -a" \
+    && echo "selesai"\
+    \
+    && bash -c 'mkdir -p ${USER_HOME}/solr/{indexed-data,database}' \
+    && echo "\n\ Buat direktori : $ mkdir -p ${USER_HOME}/solr/{indexed-data,database}" \
+    && echo "selesai"\
+    \
+    && chown ${USER}:${USER_GROUP} -R ${USER_HOME}/solr \
+    && echo "\n\ Buat Permission Group : $ chown ${USER}:${USER_GROUP} -R ${USER_HOME}/solr" \
+    && echo "selesai"\
+    \
+    && mkdir ${USER_HOME}/${USER_GROUP}-tmp \
+    && echo "\n\ Buat direktori: $ mkdir ${USER_HOME}/${USER_GROUP}-tmp " \
+    && echo "selesai"\
+    \
+    && cd ${WSO2_SERVER_REMOTE_HOME} \
+    && echo "\n\ Masuk direktori git clone : $ cd ${WSO2_SERVER_REMOTE_HOME}" \
+    && ls -l && echo "\n"\
+    && git checkout ${REMOTE_BRANCH} \
+    && echo "\n\ Pindah branch repository ${REMOTE_BRANCH} : $ git checkout ${REMOTE_BRANCH}" \
+    && ls && echo "\n"\
+    && rm -rf .git && cd .. \
+    && echo "\n\ ===== Inisialisasi Pengembangan Jaggeryapps WSO2AM =====" \
+    && cd ${WSO2_SERVER_REMOTE_HOME}/repository/deployment/server/jaggeryapps \
+    && ls && echo "\n"\
+    && echo "\n\ ===== Buat Branch Baru =====" \
+    && git config --global user.email ${MY_EMAIL_GIT} \
+    && git config --global user.user ${USER} \
+    && git init && git add . && git commit -m "buat branch baru untuk pengembangan jaggeryapps" && git branch -M dev && git branch \
+    && ls && echo "\n" \
+    && cp -r ${WSO2_SERVER_REMOTE_HOME}/repository/deployment/server/synapse-configs ${USER_HOME}/${USER_GROUP}-tmp \
+    && cp -r ${WSO2_SERVER_REMOTE_HOME}/repository/deployment/server/executionplans ${USER_HOME}/${USER_GROUP}-tmp 
 
 # atur pengguna dan direktori kerja
 USER ${USER_ID}
