@@ -64,7 +64,7 @@ ARG USER_GROUP=wso2
 ARG USER_GROUP_ID=802
 ARG USER_HOME=/home/${USER}
 ARG MY_EMAIL_GIT=admhabits@gmail.com
-ARG ACCESS_TOKEN=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
+ARG ACCESS_TOKEN=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
 
 
 # Membuat argumen untuk instalasi produk WSO2
@@ -157,11 +157,11 @@ RUN \
     \
     && wget -O ${WSO2_SERVER}.zip "${WSO2_SERVER_OFFICIAL_LINK}" \
     && unzip -d ${USER_HOME} ${WSO2_SERVER}.zip \
+    # \
+    # && mv ${USER_HOME}/${WSO2_SERVER} ${USER_HOME}/${REMOTE_NAME}  && rm -rf ${USER_HOME}/${WSO2_SERVER}\
+    # && echo "\n\ Renamed direktori : $ mv ${USER_HOME}/${WSO2_SERVER} ${USER_HOME}/${REMOTE_NAME}" \
     \
-    && mv ${USER_HOME}/${WSO2_SERVER} ${USER_HOME}/${REMOTE_NAME}  \
-    && echo "\n\ Renamed direktori : $ mv ${USER_HOME}/${WSO2_SERVER} ${USER_HOME}/${REMOTE_NAME}" \
-    \
-    && chown ${USER}:${USER_GROUP} -R ${WSO2_SERVER_REMOTE_HOME} \
+    && chown ${USER}:${USER_GROUP} -R ${WSO2_SERVER_HOME} \
     && echo "\n\ Semua direktori : $ ls -a" \
     && echo "selesai"\
     \
@@ -177,8 +177,8 @@ RUN \
     && echo "\n\ Buat direktori: $ mkdir ${USER_HOME}/${USER_GROUP}-tmp " \
     && echo "selesai"\
     \
-    && cd ${WSO2_SERVER_REMOTE_HOME} \
-    && echo "\n\ Masuk direktori git clone : $ cd ${WSO2_SERVER_REMOTE_HOME}" \
+    && cd ${WSO2_SERVER_HOME} \
+    && echo "\n\ Masuk direktori git clone : $ cd ${WSO2_SERVER_HOME}" \
     && ls -l && echo "\n"\
     \
     && echo "\n\ ===== SETUP GLOBAL GIT =====" \
@@ -196,7 +196,7 @@ RUN \
     && rm -rf .git && cd .. \
     \
     && echo "\n\ ===== Inisialisasi Jaggeryapps WSO2AM =====" \
-    && cd ${WSO2_SERVER_REMOTE_HOME}/repository/deployment/server/jaggeryapps \
+    && cd ${WSO2_SERVER_HOME}/repository/deployment/server/jaggeryapps \
     && ls && echo "\n"\
     \
     && echo "\n\ ===== Buat Branch Baru =====" \
@@ -204,8 +204,8 @@ RUN \
     && git branch -M jaggeryapps && git branch && git push origin jaggeryapps \
     \
     && ls && echo "\n" \
-    && cp -r ${WSO2_SERVER_REMOTE_HOME}/repository/deployment/server/synapse-configs ${USER_HOME}/${USER_GROUP}-tmp \
-    && cp -r ${WSO2_SERVER_REMOTE_HOME}/repository/deployment/server/executionplans ${USER_HOME}/${USER_GROUP}-tmp 
+    && cp -r ${WSO2_SERVER_HOME}/repository/deployment/server/synapse-configs ${USER_HOME}/${USER_GROUP}-tmp \
+    && cp -r ${WSO2_SERVER_HOME}/repository/deployment/server/executionplans ${USER_HOME}/${USER_GROUP}-tmp 
 
 # atur pengguna dan direktori kerja
 USER ${USER_ID}
@@ -216,7 +216,7 @@ WORKDIR ${USER_HOME}
 #     WSO2_SERVER_HOME=${WSO2_SERVER_HOME}
 
 ENV WORKING_DIRECTORY=${USER_HOME} \
-    WSO2_SERVER_HOME=${WSO2_SERVER_REMOTE_HOME}
+    WSO2_SERVER_HOME=${WSO2_SERVER_HOME}
 
 # expose ports
 EXPOSE 9763 9443 9999 11111 8280 8243 5672 9711 9611 9099
