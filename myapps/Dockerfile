@@ -84,8 +84,8 @@ USER ${USER_ROOT}
 RUN whoami
 
 RUN sudo groupadd --system -g ${USER_GROUP_ID} ${USER_GROUP} \
-    useradd --system --create-home --home-dir ${USER_HOME} --no-log-init -g ${USER_GROUP_ID} -u ${USER_ID} ${USER} \
-    echo '[ ! -z "${TERM}" -a -r /etc/motd ] && cat /etc/motd' >> /etc/bash.bashrc; echo "${MOTD}" > /etc/motd
+    && sudo useradd --system --create-home --home-dir ${USER_HOME} --no-log-init -g ${USER_GROUP_ID} -u ${USER_ID} ${USER} \
+    && sudo echo '[ ! -z "${TERM}" -a -r /etc/motd ] && cat /etc/motd' >> /etc/bash.bashrc; sudo echo "${MOTD}" > /etc/motd
 
 # salin skrip init ke home
 COPY --chown=wso2carbon:wso2 docker-entrypoint.sh ${USER_HOME}/
