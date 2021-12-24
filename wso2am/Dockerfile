@@ -152,22 +152,26 @@ RUN sudo whoami
 # === CLONE RESOURCE BRANCH DARI GITHUB ===
 RUN \
     sudo whoami \
-    && chown ${USER}:${USER_GROUP} -R ${USER_HOME} \
+    && echo "\n\ Fetching source dari repository : $ git clone ${WSO2_GITHUB_REMOTE_LINK}" \
+    && ls && echo "\n"\
+    && cd ${USER_HOME} && git clone ${WSO2_GITHUB_REMOTE_LINK} && cd $HOME \
+    \
+    && chown ${USER}:${USER_GROUP} -R ${WSO2_SERVER_REMOTE_HOME} \
     && echo "\n\ Semua direktori : $ ls -a" \
     && ls -a && echo "\n"\
+    \
     && bash -c 'mkdir -p ${USER_HOME}/solr/{indexed-data,database}' \
-    && cd ${USER_HOME} \
-    && echo "\n\ Semua direktori : $ cd ${USER_HOME}" \
+    && echo "\n\ Semua direktori : $ mkdir -p ${USER_HOME}/solr/{indexed-data,database}" \
     && ls && echo "\n"\
-    && mkdir ${USER_GROUP}-tmp \
-    && echo "\n\ Semua direktori : $ mkdir ${USER_GROUP}-tmp" \
-    && ls && echo "\n"\
+    \
     && chown ${USER}:${USER_GROUP} -R ${USER_HOME}/solr \
     && echo "\n\ Ubah kepemilikan direktori : $ chown ${USER}:${USER_GROUP} -R ${USER_HOME}/solr" \
     && ls -la && echo "\n"\
-    && git clone ${WSO2_GITHUB_REMOTE_LINK} \
-    && echo "\n\ Fetching source dari repository : $ git clone ${WSO2_GITHUB_REMOTE_LINK}" \
+    \
+    && mkdir ${USER_GROUP}-tmp \
+    && echo "\n\ Semua direktori : $ cd ${USER_HOME}" \
     && ls && echo "\n"\
+    \
     && cd ${REMOTE_NAME} \
     && echo "\n\ Masuk direktori git clone : $ cd ${REMOTE_NAME}" \
     && ls && echo "\n"\
