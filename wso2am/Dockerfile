@@ -165,7 +165,7 @@ RUN \
     && git clone ${WSO2_GITHUB_REMOTE_LINK} \
     && echo "\n\ Fetching source dari repository : $ git clone ${WSO2_GITHUB_REMOTE_LINK}" \
     && ls && echo "\n"\
-    && chown ${USER}:${USER_GROUP} -R ${REMOTE_NAME} \
+    && chown ${USER}:${USER_GROUP} -R ${WSO2_SERVER_REMOTE_HOME} \
     && echo "\n\ Semua direktori : $ ls -a" \
     && ls -a && echo "\n"\
     && cd ${REMOTE_NAME} \
