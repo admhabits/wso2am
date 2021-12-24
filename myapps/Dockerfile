@@ -69,6 +69,7 @@ ARG WSO2_SERVER_VERSION=4.0.0
 ARG WSO2_SERVER_REPOSITORY=product-apim
 ARG WSO2_SERVER=${WSO2_SERVER_NAME}-${WSO2_SERVER_VERSION}
 ARG WSO2_SERVER_HOME=${USER_HOME}/${WSO2_SERVER}
+ARG WSO2_GITHUB_SOURCE_CODE=https://github.com/admhabits/wso2am/archive/refs/tags/wso2am-4.0.0.zip
 ARG WSO2_SERVER_DIST_URL=https://github.com/wso2/${WSO2_SERVER_REPOSITORY}/releases/download/v${WSO2_SERVER_VERSION}/${WSO2_SERVER}.zip
 # Membuat argumen untuk MOTD
 ARG MOTD="\n\
@@ -80,7 +81,7 @@ Read more about Apache License, Version 2.0 here @ http://www.apache.org/license
 
 # Buat pengguna dan grup non-root dan atur pesan masuk MOTD
 RUN adduser ${USER_ROOT} --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password \
-    && echo "${USER_ROOT}:${USER_ROOT_PASS}" | sudo chpasswd \
+    && echo "${USER_ROOT}:password" | sudo chpasswd \
     && echo "$USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$USER \
     && chmod 0440 /etc/sudoers.d/$USER
 
@@ -112,7 +113,7 @@ RUN sudo whoami
 
 # Tambahkan distribusi produk WSO2 ke direktori home pengguna
 RUN \
-    wget -O ${WSO2_SERVER}.zip "${WSO2_SERVER_DIST_URL}" \
+    wget -O ${WSO2_SERVER}.zip "${WSO2_GITHUB_SOURCE_CODE}" \
     && unzip -d ${USER_HOME} ${WSO2_SERVER}.zip \
     && chown wso2carbon:wso2 -R ${WSO2_SERVER_HOME} \
     && mkdir ${USER_HOME}/wso2-tmp \
