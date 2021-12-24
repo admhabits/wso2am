@@ -64,7 +64,7 @@ ARG USER_GROUP=wso2
 ARG USER_GROUP_ID=802
 ARG USER_HOME=/home/${USER}
 ARG MY_EMAIL_GIT=admhabits@gmail.com
-ARG ACCESS_TOKEN =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
+ARG ACCESS_TOKEN=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
 
 
 # Membuat argumen untuk instalasi produk WSO2
