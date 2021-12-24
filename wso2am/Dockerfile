@@ -64,7 +64,7 @@ ARG USER_GROUP=wso2
 ARG USER_GROUP_ID=802
 ARG USER_HOME=/home/${USER}
 ARG MY_EMAIL_GIT=admhabits@gmail.com
-ARG ACCESS_TOKEN=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
+ARG ACCESS_TOKEN =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
 
 
 # Membuat argumen untuk instalasi produk WSO2
@@ -114,12 +114,12 @@ RUN \
         netcat \
         unzip \
         wget \
-        # mc \
-        # nano \
-        # vim \
-        git 
-        # nodejs \
-        # npm 
+        mc \
+        nano \
+        vim \
+        git \
+        nodejs \
+        npm 
 
 # Tambahkan distribusi produk WSO2 ke direktori home pengguna
 
@@ -181,9 +181,13 @@ RUN \
     && echo "\n\ Masuk direktori git clone : $ cd ${WSO2_SERVER_REMOTE_HOME}" \
     && ls -l && echo "\n"\
     \
+    && echo "\n\ ===== SETUP GLOBAL GIT =====" \
+    && git config --global user.email ${MY_EMAIL_GIT} \
+    && git config --global user.user ${USER} \
+    \
     && git init \
     && git remote add origin ${WSO2_GITHUB_REMOTE_LINK} \
-    && git add . && git commit -m "setup server branch" && git branch -M server \
+    && git add . && git commit -m "setup server branch" && git branch -M ${REMOTE_BRANCH} \
     && git push origin server \
     && git checkout ${REMOTE_BRANCH} \
     \
@@ -191,14 +195,11 @@ RUN \
     && ls && echo "\n"\
     && rm -rf .git && cd .. \
     \
-    && echo "\n\ ===== Inisialisasi Pengembangan Jaggeryapps WSO2AM =====" \
+    && echo "\n\ ===== Inisialisasi Jaggeryapps WSO2AM =====" \
     && cd ${WSO2_SERVER_REMOTE_HOME}/repository/deployment/server/jaggeryapps \
     && ls && echo "\n"\
     \
     && echo "\n\ ===== Buat Branch Baru =====" \
-    && git config --global user.email ${MY_EMAIL_GIT} \
-    && git config --global user.user ${USER} \
-    \
     && git init && git add . && git commit -m "buat branch baru untuk pengembangan jaggeryapps" \
     && git branch -M jaggeryapps && git branch && git push origin jaggeryapps \
     \
