@@ -151,13 +151,14 @@ RUN sudo whoami
 # === CLONE RESOURCE BRANCH DARI GITHUB ===
 RUN \
     mkdir ${USER_HOME} \
-    && cd ${USER_HOME} \
-    && git clone ${WSO2_GITHUB_REMOTE_LINK} \
-    && chown ${USER}:${USER_GROUP} -R ${REMOTE_NAME} \
-    && cd ${REMOTE_NAME} && git checkout ${REMOTE_BRANCH} && rm -rf .git && cd .. \
-    && cd ${REMOTE_NAME}/repository/deployment/server \
     && mkdir ${USER_HOME}/${USER_GROUP}-tmp \
     && bash -c 'mkdir -p ${USER_HOME}/solr/{indexed-data,database}' \
+    && cd /${USER_HOME} \
+    && git clone ${WSO2_GITHUB_REMOTE_LINK} \
+    && chown ${USER}:${USER_GROUP} -R ${REMOTE_NAME} \
+    && cd /${REMOTE_NAME} && git checkout ${REMOTE_BRANCH} && rm -rf .git && cd .. \
+    && cd /${REMOTE_NAME}/repository/deployment/server \
+   
     && chown ${USER}:${USER_GROUP} -R ${USER_HOME}/solr \
     && cp -r ${WSO2_SERVER_REMOTE_HOME}/repository/deployment/server/synapse-configs ${USER_HOME}/${USER_GROUP}-tmp \
     && cp -r ${WSO2_SERVER_REMOTE_HOME}/repository/deployment/server/executionplans ${USER_HOME}/${USER_GROUP}-tmp 
