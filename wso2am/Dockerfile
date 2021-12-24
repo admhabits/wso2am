@@ -154,7 +154,7 @@ RUN \
     sudo whoami \
     && echo "\n\ Fetching source dari repository : $ git clone ${WSO2_GITHUB_REMOTE_LINK}" \
     && ls && echo "\n"\
-    && cd ${USER_HOME} && git clone ${WSO2_GITHUB_REMOTE_LINK} && cd $HOME \
+    && cd ${USER_HOME} && git clone ${WSO2_GITHUB_REMOTE_LINK} && cd .. && cd .. \
     ls\
     && chown ${USER}:${USER_GROUP} -R ${WSO2_SERVER_REMOTE_HOME} \
     && echo "\n\ Semua direktori : $ ls -a" \
