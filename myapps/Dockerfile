@@ -152,21 +152,21 @@ RUN sudo whoami
 RUN \
     sudo whoami \
     && cd ${USER_HOME} \
-    && echo "\n\ Lihat semua directory : cd ${USER_HOME}\n" \
-    && ls \
+    && echo "\n\ Lihat semua directory : cd ${USER_HOME}" \
+    && ls && echo "\n"\
     && mkdir ${USER_GROUP}-tmp \
     && bash -c 'mkdir -p /solr/{indexed-data,database}' \
     && echo "\n\ Lihat semua directory : mkdir ${USER_GROUP}-tmp" \
-    && ls \
+    && ls && echo "\n"\
     && chown ${USER}:${USER_GROUP} -R ${USER_HOME}/solr \
     && echo "\n\ Lihat semua directory : " \
-    && ls \
+    && ls && echo "\n"\
     && git clone ${WSO2_GITHUB_REMOTE_LINK} \
     && echo "\n\ Lihat semua directory : git clone ${WSO2_GITHUB_REMOTE_LINK}" \
-    && ls \
+    && ls && echo "\n"\
     && chown ${USER}:${USER_GROUP} -R ${REMOTE_NAME} \
     && echo "\n\ Lihat semua directory : " \
-    && ls \
+    && ls && echo "\n"\
     && cd ${REMOTE_NAME} \
     && git checkout ${REMOTE_BRANCH} \
     && rm -rf .git && cd .. \
