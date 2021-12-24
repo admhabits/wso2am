@@ -1,4 +1,4 @@
-name: api-manager
+name: product-apim
 services:
   mysql:
     image: mysql:5.7.34
