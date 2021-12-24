@@ -75,14 +75,6 @@ This Docker container comprises of a WSO2 product, running with its latest GA re
 which is under the Apache License, Version 2.0. \n\
 Read more about Apache License, Version 2.0 here @ http://www.apache.org/licenses/LICENSE-2.0.\n"
 
-# Buat Sudo User Baru
-RUN adduser ${USER} \ 
-    && usermod -aG sudo ${USER}
-
-# RUN adduser -D ${USER} \
-#         && echo "${USER} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${USER} \
-#         && chmod 0440 /etc/sudoers.d/${USER}
-# USER ${USER}
 
 # Buat pengguna dan grup non-root dan atur pesan masuk MOTD
 RUN \
@@ -108,6 +100,19 @@ RUN \
         npm \
         sudo 
 
+
+# Buat Sudo User Baru
+# RUN adduser ${USER} \ 
+#     && usermod -aG sudo ${USER} -y \
+#     && ${USER}
+
+RUN adduser ${USER} \
+        && echo "${USER} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${USER} \
+        && chmod 0440 /etc/sudoers.d/${USER}
+USER ${USER}
+# WORKDIR $HOME
+RUN whoami
+RUN sudo whoami
 
 # Tambahkan distribusi produk WSO2 ke direktori home pengguna
 RUN \
