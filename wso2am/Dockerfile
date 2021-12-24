@@ -152,7 +152,6 @@ RUN sudo whoami
 # === CLONE RESOURCE BRANCH DARI GITHUB ===
 RUN \
     sudo whoami \
-    && ls \
     && chown ${USER}:${USER_GROUP} -R ${USER_HOME} \
     && echo "\n\ Semua direktori : $ ls -a" \
     && ls -a && echo "\n"\
