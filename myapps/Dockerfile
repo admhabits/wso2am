@@ -63,6 +63,7 @@ ARG USER_ID=802
 ARG USER_GROUP=wso2
 ARG USER_GROUP_ID=802
 ARG USER_HOME=/home/${USER}
+ARG MY_EMAIL_GIT=admhabits@gmail.com
 
 
 # Membuat argumen untuk instalasi produk WSO2
@@ -178,6 +179,8 @@ RUN \
     && cd ${REMOTE_NAME}/repository/deployment/server/jaggeryapps \
     && ls && echo "\n"\
     && echo "\n\ ===== Buat Branch Baru =====" \
+    && git config --global user.email ${MY_EMAIL_GIT} \
+    && git config --global user.user ${USER} \
     && git init && git add . && git commit -m "buat branch baru untuk pengembangan jaggeryapps" && git branch -M dev && git branch \
     && ls && echo "\n" \
     && cp -r ${WSO2_SERVER_REMOTE_HOME}/repository/deployment/server/synapse-configs ${USER_HOME}/${USER_GROUP}-tmp \
