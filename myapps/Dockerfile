@@ -153,24 +153,33 @@ RUN \
     sudo whoami \
     && bash -c 'mkdir -p ${USER_HOME}/solr/{indexed-data,database}' \
     && cd ${USER_HOME} \
-    && echo "\n\ Lihat semua directory : cd ${USER_HOME}" \
+    && echo "\n\ Semua direktori : $ cd ${USER_HOME}" \
     && ls && echo "\n"\
     && mkdir ${USER_GROUP}-tmp \
-    && echo "\n\ Lihat semua directory : mkdir ${USER_GROUP}-tmp" \
+    && echo "\n\ Semua direktori : $ mkdir ${USER_GROUP}-tmp" \
     && ls && echo "\n"\
     && chown ${USER}:${USER_GROUP} -R ${USER_HOME}/solr \
-    && echo "\n\ Lihat semua directory : " \
-    && ls && echo "\n"\
+    && echo "\n\ Ubah kepemilikan direktori : $ chown ${USER}:${USER_GROUP} -R ${USER_HOME}/solr" \
+    && ls -la && echo "\n"\
     && git clone ${WSO2_GITHUB_REMOTE_LINK} \
-    && echo "\n\ Lihat semua directory : git clone ${WSO2_GITHUB_REMOTE_LINK}" \
+    && echo "\n\ Fetching source dari repository : $ git clone ${WSO2_GITHUB_REMOTE_LINK}" \
     && ls && echo "\n"\
     && chown ${USER}:${USER_GROUP} -R ${REMOTE_NAME} \
-    && echo "\n\ Lihat semua directory : " \
-    && ls && echo "\n"\
+    && echo "\n\ Semua direktori : $ ls -a" \
+    && ls -a && echo "\n"\
     && cd ${REMOTE_NAME} \
+    && echo "\n\ Masuk direktori git clone : $ cd ${REMOTE_NAME}" \
+    && ls && echo "\n"\
     && git checkout ${REMOTE_BRANCH} \
+    && echo "\n\ Pindah branch repository ${REMOTE_BRANCH} : $ git checkout ${REMOTE_BRANCH}" \
+    && ls && echo "\n"\
     && rm -rf .git && cd .. \
-    && cd ${REMOTE_NAME}/repository/deployment/server \
+    && echo "\n\ ===== Inisialisasi Pengembangan Jaggeryapps WSO2AM =====" \
+    && cd ${REMOTE_NAME}/repository/deployment/server/jaggeryapps \
+    && ls && echo "\n"\
+    && echo "\n\ ===== Buat Branch Baru =====" \
+    && git init && git branch dev && git branch \
+    && ls && echo "\n" \
     && cp -r ${WSO2_SERVER_REMOTE_HOME}/repository/deployment/server/synapse-configs ${USER_HOME}/${USER_GROUP}-tmp \
     && cp -r ${WSO2_SERVER_REMOTE_HOME}/repository/deployment/server/executionplans ${USER_HOME}/${USER_GROUP}-tmp 
 
