@@ -153,7 +153,7 @@ RUN sudo whoami
 RUN \
     sudo whoami \
     && ls \
-    && chown ${USER}:${USER_GROUP} -R ${WSO2_SERVER_REMOTE_HOME} \
+    && chown ${USER}:${USER_GROUP} -R ${USER_HOME} \
     && echo "\n\ Semua direktori : $ ls -a" \
     && ls -a && echo "\n"\
     && bash -c 'mkdir -p ${USER_HOME}/solr/{indexed-data,database}' \
