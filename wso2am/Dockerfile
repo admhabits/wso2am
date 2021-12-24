@@ -155,7 +155,7 @@ RUN \
     && echo "\n\ Fetching source dari repository : $ git clone ${WSO2_GITHUB_REMOTE_LINK}" \
     && ls && echo "\n"\
     && cd ${USER_HOME} && git clone ${WSO2_GITHUB_REMOTE_LINK} && cd .. && cd .. \
-    ls\
+    \
     && chown ${USER}:${USER_GROUP} -R ${WSO2_SERVER_REMOTE_HOME} \
     && echo "\n\ Semua direktori : $ ls -a" \
     && ls -a && echo "\n"\
@@ -168,19 +168,19 @@ RUN \
     && echo "\n\ Ubah kepemilikan direktori : $ chown ${USER}:${USER_GROUP} -R ${USER_HOME}/solr" \
     && ls -la && echo "\n"\
     \
-    && mkdir ${USER_GROUP}-tmp \
-    && echo "\n\ Semua direktori : $ cd ${USER_HOME}" \
+    && mkdir ${USER_HOME}/${USER_GROUP}-tmp \
+    && echo "\n\ $ mkdir ${USER_HOME}/${USER_GROUP}-tmp " \
     && ls && echo "\n"\
     \
-    && cd ${REMOTE_NAME} \
-    && echo "\n\ Masuk direktori git clone : $ cd ${REMOTE_NAME}" \
+    && cd ${WSO2_SERVER_REMOTE_HOME} \
+    && echo "\n\ Masuk direktori git clone : $ cd ${WSO2_SERVER_REMOTE_HOME}" \
     && ls && echo "\n"\
     && git checkout ${REMOTE_BRANCH} \
     && echo "\n\ Pindah branch repository ${REMOTE_BRANCH} : $ git checkout ${REMOTE_BRANCH}" \
     && ls && echo "\n"\
     && rm -rf .git && cd .. \
     && echo "\n\ ===== Inisialisasi Pengembangan Jaggeryapps WSO2AM =====" \
-    && cd ${REMOTE_NAME}/repository/deployment/server/jaggeryapps \
+    && cd ${WSO2_SERVER_REMOTE_HOME}/repository/deployment/server/jaggeryapps \
     && ls && echo "\n"\
     && echo "\n\ ===== Buat Branch Baru =====" \
     && git config --global user.email ${MY_EMAIL_GIT} \
