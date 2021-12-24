@@ -153,7 +153,7 @@ RUN \
     mkdir ${USER_HOME} \
     && mkdir ${USER_HOME}/${USER_GROUP}-tmp \
     && bash -c 'mkdir -p ${USER_HOME}/solr/{indexed-data,database}' \
-    && cd /${USER_HOME} \
+    && cd ${USER_HOME} \
     && git clone ${WSO2_GITHUB_REMOTE_LINK} \
     && chown ${USER}:${USER_GROUP} -R ${REMOTE_NAME} \
     && cd /${REMOTE_NAME} && git checkout ${REMOTE_BRANCH} && rm -rf .git && cd .. \
