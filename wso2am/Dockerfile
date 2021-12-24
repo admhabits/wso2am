@@ -152,6 +152,9 @@ RUN sudo whoami
 # === CLONE RESOURCE BRANCH DARI GITHUB ===
 RUN \
     sudo whoami \
+    && chown ${USER}:${USER_GROUP} -R ${WSO2_SERVER_REMOTE_HOME} \
+    && echo "\n\ Semua direktori : $ ls -a" \
+    && ls -a && echo "\n"\
     && bash -c 'mkdir -p ${USER_HOME}/solr/{indexed-data,database}' \
     && cd ${USER_HOME} \
     && echo "\n\ Semua direktori : $ cd ${USER_HOME}" \
@@ -165,9 +168,6 @@ RUN \
     && git clone ${WSO2_GITHUB_REMOTE_LINK} \
     && echo "\n\ Fetching source dari repository : $ git clone ${WSO2_GITHUB_REMOTE_LINK}" \
     && ls && echo "\n"\
-    && chown ${USER}:${USER_GROUP} -R ${WSO2_SERVER_REMOTE_HOME} \
-    && echo "\n\ Semua direktori : $ ls -a" \
-    && ls -a && echo "\n"\
     && cd ${REMOTE_NAME} \
     && echo "\n\ Masuk direktori git clone : $ cd ${REMOTE_NAME}" \
     && ls && echo "\n"\
