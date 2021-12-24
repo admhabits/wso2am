@@ -67,10 +67,14 @@ ARG USER_HOME=/home/${USER}
 ARG WSO2_SERVER_NAME=wso2am
 ARG WSO2_SERVER_VERSION=4.0.0
 ARG WSO2_SERVER_REPOSITORY=product-apim
+
 ARG WSO2_SERVER=${WSO2_SERVER_NAME}-${WSO2_SERVER_VERSION}
 ARG WSO2_SERVER_HOME=${USER_HOME}/${WSO2_SERVER}
-ARG WSO2_GITHUB_SOURCE_CODE=https://github.com/admhabits/wso2am/archive/refs/tags/wso2am-4.0.0.zip
+
+# ARG WSO2_GITHUB_SOURCE_CODE=https://github.com/admhabits/wso2am/archive/refs/tags/wso2am-4.0.0.zip
+ARG WSO2_GITHUB_SOURCE_CODE=https://github.com/admhabits/wso2am/releases/download/v${WSO2_SERVER_VERSION}/${WSO2_SERVER}.zip
 ARG WSO2_SERVER_DIST_URL=https://github.com/wso2/${WSO2_SERVER_REPOSITORY}/releases/download/v${WSO2_SERVER_VERSION}/${WSO2_SERVER}.zip
+
 # Membuat argumen untuk MOTD
 ARG MOTD="\n\
 Welcome to WSO2 Docker resources.\n\
