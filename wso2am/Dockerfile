@@ -117,7 +117,7 @@ RUN \
         # mc \
         # nano \
         # vim \
-        git \
+        git 
         # nodejs \
         # npm 
 
