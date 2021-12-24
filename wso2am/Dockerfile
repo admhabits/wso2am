@@ -120,9 +120,6 @@ RUN \
         nodejs \
         npm 
 
-RUN whoami
-RUN sudo whoami
-
 # Tambahkan distribusi produk WSO2 ke direktori home pengguna
 
 # === DOWNLOAD RESOURCE DARI GITHUB OFFICIAL ===
