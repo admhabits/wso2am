@@ -77,9 +77,11 @@ which is under the Apache License, Version 2.0. \n\
 Read more about Apache License, Version 2.0 here @ http://www.apache.org/licenses/LICENSE-2.0.\n"
 
 # Buat pengguna dan grup non-root dan atur pesan masuk MOTD
-RUN adduser --disabled-password ${USER} \
-        && echo "${USER} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${USER} \
-        && chmod 0440 /etc/sudoers.d/${USER}
+# RUN adduser --disabled-password ${USER} \
+#         && echo "${USER} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${USER} \
+#         && chmod 0440 /etc/sudoers.d/${USER}
+RUN adduser ${USER} --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password \
+    && echo "${USER}:password" | sudo chpasswd
 USER ${USER}
 
 RUN \ 
