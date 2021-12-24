@@ -63,7 +63,10 @@ ARG USER_ID=802
 ARG USER_GROUP=wso2
 ARG USER_GROUP_ID=802
 ARG USER_HOME=/home/${USER}
+
+
 # Membuat argumen untuk instalasi produk WSO2
+ARG REMOTE_NAME=wso2am
 ARG WSO2_SERVER_NAME=wso2am
 ARG WSO2_SERVER_VERSION=4.0.0
 ARG WSO2_SERVER_REPOSITORY=product-apim
@@ -72,9 +75,11 @@ ARG WSO2_SERVER=${WSO2_SERVER_NAME}-${WSO2_SERVER_VERSION}
 ARG WSO2_SERVER_HOME=${USER_HOME}/${WSO2_SERVER}
 
 ARG WSO2_SERVER_GITHUB_HOME=${USER_HOME}/${WSO2_SERVER_NAME}-${WSO2_SERVER}
-ARG WSO2_GITHUB_SOURCE_CODE=https://github.com/admhabits/wso2am/archive/refs/tags/wso2am-4.0.0.zip
+ARG WSO2_SERVER_REMOTE_HOME=${USER_HOME}/${REMOTE_NAME}
 
-ARG WSO2_SERVER_DIST_URL=https://github.com/wso2/${WSO2_SERVER_REPOSITORY}/releases/download/v${WSO2_SERVER_VERSION}/${WSO2_SERVER}.zip
+ARG WSO2_GITHUB_REMOTE_LINK=https://github.com/admhabits/${REMOTE_NAME}.git
+ARG WSO2_GITHUB_SOURCE_CODE=https://github.com/admhabits/wso2am/archive/refs/tags/wso2am-4.0.0.zip
+ARG WSO2_SERVER_OFFICIAL_LINK=https://github.com/wso2/${WSO2_SERVER_REPOSITORY}/releases/download/v${WSO2_SERVER_VERSION}/${WSO2_SERVER}.zip
 
 # Membuat argumen untuk MOTD
 ARG MOTD="\n\
@@ -117,27 +122,44 @@ RUN whoami
 RUN sudo whoami
 
 # Tambahkan distribusi produk WSO2 ke direktori home pengguna
+
+# === DOWNLOAD RESOURCE DARI GITHUB OFFICIAL ===
+# RUN \
+#     wget -O ${WSO2_SERVER}.zip "${WSO2_SERVER_OFFICIAL_LINK}" \
+#     && unzip -d ${USER_HOME} ${WSO2_SERVER}.zip \
+#     && chown ${USER}:${USER_GROUP} -R ${WSO2_SERVER_HOME} \
+#     && mkdir ${USER_HOME}/${USER_GROUP}-tmp \
+#     && bash -c 'mkdir -p ${USER_HOME}/solr/{indexed-data,database}' \
+#     && chown ${USER}:${USER_GROUP} -R ${USER_HOME}/solr \
+#     && cp -r ${WSO2_SERVER_HOME}/repository/deployment/server/synapse-configs ${USER_HOME}/${USER_GROUP}-tmp \
+#     && cp -r ${WSO2_SERVER_HOME}/repository/deployment/server/executionplans ${USER_HOME}/${USER_GROUP}-tmp \
+#     && rm -f ${WSO2_SERVER}.zip
+
+# === DOWNLOAD RESOURCE RILIS DARI GITHUB ===
 # RUN \
 #     wget -O ${WSO2_SERVER}.zip "${WSO2_GITHUB_SOURCE_CODE}" \
 #     && unzip -d ${USER_HOME} ${WSO2_SERVER}.zip \
-#     && chown wso2carbon:wso2 -R ${WSO2_SERVER_HOME} \
-#     && mkdir ${USER_HOME}/wso2-tmp \
+#     && chown ${USER}:${USER_GROUP} -R ${WSO2_SERVER_GITHUB_HOME} \
+#     && mkdir ${USER_HOME}/${USER_GROUP}-tmp \
 #     && bash -c 'mkdir -p ${USER_HOME}/solr/{indexed-data,database}' \
-#     && chown wso2carbon:wso2 -R ${USER_HOME}/solr \
-#     && cp -r ${WSO2_SERVER_HOME}/repository/deployment/server/synapse-configs ${USER_HOME}/wso2-tmp \
-#     && cp -r ${WSO2_SERVER_HOME}/repository/deployment/server/executionplans ${USER_HOME}/wso2-tmp \
+#     && chown ${USER}:${USER_GROUP} -R ${USER_HOME}/solr \
+#     && cp -r ${WSO2_SERVER_GITHUB_HOME}/repository/deployment/server/synapse-configs ${USER_HOME}/${USER_GROUP}-tmp \
+#     && cp -r ${WSO2_SERVER_GITHUB_HOME}/repository/deployment/server/executionplans ${USER_HOME}/${USER_GROUP}-tmp \
 #     && rm -f ${WSO2_SERVER}.zip
 
+# === CLONE RESOURCE BRANCH DARI GITHUB ===
 RUN \
-    wget -O ${WSO2_SERVER}.zip "${WSO2_GITHUB_SOURCE_CODE}" \
-    && unzip -d ${USER_HOME} ${WSO2_SERVER}.zip \
-    && chown wso2carbon:wso2 -R ${WSO2_SERVER_GITHUB_HOME} \
-    && mkdir ${USER_HOME}/wso2-tmp \
+    mkdir ${USER_HOME} \
+    && cd ${USER_HOME} \
+    && git clone ${WSO2_GITHUB_REMOTE_LINK} \
+    && chown ${USER}:${USER_GROUP} -R ${REMOTE_NAME} \
+    && cd ${REMOTE_NAME} && rm -rf .git && cd .. \
+    && cd ${REMOTE_NAME}/repository/deployment/server \
+    && mkdir ${USER_HOME}/${USER_GROUP}-tmp \
     && bash -c 'mkdir -p ${USER_HOME}/solr/{indexed-data,database}' \
-    && chown wso2carbon:wso2 -R ${USER_HOME}/solr \
-    && cp -r ${WSO2_SERVER_GITHUB_HOME}/repository/deployment/server/synapse-configs ${USER_HOME}/wso2-tmp \
-    && cp -r ${WSO2_SERVER_GITHUB_HOME}/repository/deployment/server/executionplans ${USER_HOME}/wso2-tmp \
-    && rm -f ${WSO2_SERVER}.zip
+    && chown ${USER}:${USER_GROUP} -R ${USER_HOME}/solr \
+    && cp -r ${WSO2_SERVER_REMOTE_HOME}/repository/deployment/server/synapse-configs ${USER_HOME}/${USER_GROUP}-tmp \
+    && cp -r ${WSO2_SERVER_REMOTE_HOME}/repository/deployment/server/executionplans ${USER_HOME}/${USER_GROUP}-tmp 
 
 # atur pengguna dan direktori kerja
 USER ${USER_ID}
@@ -148,7 +170,7 @@ WORKDIR ${USER_HOME}
 #     WSO2_SERVER_HOME=${WSO2_SERVER_HOME}
 
 ENV WORKING_DIRECTORY=${USER_HOME} \
-    WSO2_SERVER_HOME=${WSO2_SERVER_GITHUB_HOME}
+    WSO2_SERVER_HOME=${WSO2_SERVER_REMOTE_HOME}
 
 # expose ports
 EXPOSE 9763 9443 9999 11111 8280 8243 5672 9711 9611 9099
