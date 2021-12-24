@@ -114,12 +114,12 @@ RUN \
         netcat \
         unzip \
         wget \
-        mc \
-        nano \
-        vim \
+        # mc \
+        # nano \
+        # vim \
         git \
-        nodejs \
-        npm 
+        # nodejs \
+        # npm 
 
 # Tambahkan distribusi produk WSO2 ke direktori home pengguna
 
