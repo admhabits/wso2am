@@ -149,9 +149,16 @@ RUN \
 # === CLONE RESOURCE BRANCH DARI GITHUB ===
 RUN \
     sudo whoami \
-    && echo "\n\ Fetching source dari repository : $ git clone ${WSO2_GITHUB_REMOTE_LINK}" \
-    && echo "selesai"\
-    && cd ${USER_HOME} && git clone ${WSO2_GITHUB_REMOTE_LINK} && cd .. && cd .. \
+    # # Comment line dibawah ini Jika Ingin Clone Server WSO dari repo yang lain
+    # && cd ${USER_HOME} && git clone ${WSO2_GITHUB_REMOTE_LINK} && cd .. && cd .. \
+    # && echo "\n\ Fetching source dari repository jika ada : $ git clone ${WSO2_GITHUB_REMOTE_LINK}" \
+    # && echo "selesai"\
+    \
+    wget -O ${WSO2_SERVER}.zip "${WSO2_SERVER_OFFICIAL_LINK}" \
+    && unzip -d ${USER_HOME} ${WSO2_SERVER}.zip \
+    \
+    && mv ${USER_HOME}/${WSO2_SERVER} ${USER_HOME}/${REMOTE_NAME}  \
+    && echo "\n\ Renamed direktori : $ mv ${USER_HOME}/${WSO2_SERVER} ${USER_HOME}/${REMOTE_NAME}" \
     \
     && chown ${USER}:${USER_GROUP} -R ${WSO2_SERVER_REMOTE_HOME} \
     && echo "\n\ Semua direktori : $ ls -a" \
