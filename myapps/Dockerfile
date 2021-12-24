@@ -93,7 +93,15 @@ RUN \
         wget \
         mc \
         nano \
-        vim
+        vim \
+        git \
+        nodejs \
+        npm \
+        sudo 
+
+RUN adduser ${USER_HOME} \ 
+    && usermod -aG sudo ${USER_HOME}
+
 # Tambahkan distribusi produk WSO2 ke direktori home pengguna
 RUN \
     wget -O ${WSO2_SERVER}.zip "${WSO2_SERVER_DIST_URL}" \
