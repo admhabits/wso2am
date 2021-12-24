@@ -93,7 +93,7 @@ Read more about Apache License, Version 2.0 here @ http://www.apache.org/license
 
 # Buat pengguna dan grup non-root dan atur pesan masuk MOTD
 RUN adduser ${USER_ROOT} --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password \
-    && echo "${USER_ROOT}:password" | sudo chpasswd \
+    && echo "${USER_ROOT}:password" | sudo chpasswd
     # && echo "$USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$USER \
     # && chmod 0440 /etc/sudoers.d/$USER
 
