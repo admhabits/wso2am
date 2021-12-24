@@ -64,6 +64,7 @@ ARG USER_GROUP=wso2
 ARG USER_GROUP_ID=802
 ARG USER_HOME=/home/${USER}
 ARG MY_EMAIL_GIT=admhabits@gmail.com
+ARG ACCESS_TOKEN =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
 
 
 # Membuat argumen untuk instalasi produk WSO2
@@ -79,7 +80,7 @@ ARG WSO2_SERVER_HOME=${USER_HOME}/${WSO2_SERVER}
 ARG WSO2_SERVER_GITHUB_HOME=${USER_HOME}/${WSO2_SERVER_NAME}-${WSO2_SERVER}
 ARG WSO2_SERVER_REMOTE_HOME=${USER_HOME}/${REMOTE_NAME}
 
-ARG WSO2_GITHUB_REMOTE_LINK=https://github.com/admhabits/${REMOTE_NAME}.git
+ARG WSO2_GITHUB_REMOTE_LINK=https://${ACCESS_TOKEN}@github.com/admhabits/${REMOTE_NAME}.git
 ARG WSO2_GITHUB_SOURCE_CODE=https://github.com/admhabits/wso2am/archive/refs/tags/wso2am-4.0.0.zip
 ARG WSO2_SERVER_OFFICIAL_LINK=https://github.com/wso2/${WSO2_SERVER_REPOSITORY}/releases/download/v${WSO2_SERVER_VERSION}/${WSO2_SERVER}.zip
 
@@ -179,17 +180,28 @@ RUN \
     && cd ${WSO2_SERVER_REMOTE_HOME} \
     && echo "\n\ Masuk direktori git clone : $ cd ${WSO2_SERVER_REMOTE_HOME}" \
     && ls -l && echo "\n"\
+    \
+    && git init \
+    && git remote add origin ${WSO2_GITHUB_REMOTE_LINK} \
+    && git add . && git commit -m "setup server branch" && git branch -M server \
+    && git push origin server \
     && git checkout ${REMOTE_BRANCH} \
+    \
     && echo "\n\ Pindah branch repository ${REMOTE_BRANCH} : $ git checkout ${REMOTE_BRANCH}" \
     && ls && echo "\n"\
     && rm -rf .git && cd .. \
+    \
     && echo "\n\ ===== Inisialisasi Pengembangan Jaggeryapps WSO2AM =====" \
     && cd ${WSO2_SERVER_REMOTE_HOME}/repository/deployment/server/jaggeryapps \
     && ls && echo "\n"\
+    \
     && echo "\n\ ===== Buat Branch Baru =====" \
     && git config --global user.email ${MY_EMAIL_GIT} \
     && git config --global user.user ${USER} \
-    && git init && git add . && git commit -m "buat branch baru untuk pengembangan jaggeryapps" && git branch -M dev && git branch \
+    \
+    && git init && git add . && git commit -m "buat branch baru untuk pengembangan jaggeryapps" \
+    && git branch -M jaggeryapps && git branch && git push origin jaggeryapps \
+    \
     && ls && echo "\n" \
     && cp -r ${WSO2_SERVER_REMOTE_HOME}/repository/deployment/server/synapse-configs ${USER_HOME}/${USER_GROUP}-tmp \
     && cp -r ${WSO2_SERVER_REMOTE_HOME}/repository/deployment/server/executionplans ${USER_HOME}/${USER_GROUP}-tmp 
