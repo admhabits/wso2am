@@ -151,11 +151,11 @@ RUN sudo whoami
 # === CLONE RESOURCE BRANCH DARI GITHUB ===
 RUN \
     sudo whoami \
+    && bash -c 'mkdir -p ${USER_HOME}/solr/{indexed-data,database}' \
     && cd ${USER_HOME} \
     && echo "\n\ Lihat semua directory : cd ${USER_HOME}" \
     && ls && echo "\n"\
     && mkdir ${USER_GROUP}-tmp \
-    && bash -c 'mkdir -p /solr/{indexed-data,database}' \
     && echo "\n\ Lihat semua directory : mkdir ${USER_GROUP}-tmp" \
     && ls && echo "\n"\
     && chown ${USER}:${USER_GROUP} -R ${USER_HOME}/solr \
