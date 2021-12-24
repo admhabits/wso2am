@@ -155,17 +155,17 @@ RUN \
     && echo "\n\ Lihat semua directory : cd ${USER_HOME}\n" \
     && ls \
     && mkdir ${USER_GROUP}-tmp \
-    && echo "\n\ Lihat semua directory : mkdir ${USER_GROUP}-tmp \n" \
-    && ls \
     && bash -c 'mkdir -p /solr/{indexed-data,database}' \
+    && echo "\n\ Lihat semua directory : mkdir ${USER_GROUP}-tmp" \
+    && ls \
     && chown ${USER}:${USER_GROUP} -R ${USER_HOME}/solr \
-    && echo "\n\ Lihat semua directory : \n" \
+    && echo "\n\ Lihat semua directory : " \
     && ls \
     && git clone ${WSO2_GITHUB_REMOTE_LINK} \
-    && echo "\n\ Lihat semua directory : git clone ${WSO2_GITHUB_REMOTE_LINK}\n" \
+    && echo "\n\ Lihat semua directory : git clone ${WSO2_GITHUB_REMOTE_LINK}" \
     && ls \
     && chown ${USER}:${USER_GROUP} -R ${REMOTE_NAME} \
-    && echo "\n\ Lihat semua directory : \n" \
+    && echo "\n\ Lihat semua directory : " \
     && ls \
     && cd ${REMOTE_NAME} \
     && git checkout ${REMOTE_BRANCH} \
